@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.DrinksDetailFragment">
 
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/ivDrink"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
+        android:layout_margin="10dp"/>
+    
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvDrinkName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fragment Detail Drinks"
+        android:text="Margarita Blue"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        android:textStyle="bold"
+        android:layout_marginHorizontal="10dp"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tvDrinkHasAlcohol"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go to List Drinks"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.05" />
+        android:layout_marginHorizontal="10dp"
+        android:text="Drink with Alcoholic"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvDrinkDescription"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="10dp"/>
+
+
+</LinearLayout>

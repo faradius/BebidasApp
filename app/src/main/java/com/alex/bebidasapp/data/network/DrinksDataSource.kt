@@ -1,12 +1,11 @@
-package com.alex.bebidasapp.data.local
+package com.alex.bebidasapp.data.network
 
 import com.alex.bebidasapp.data.model.Drink
-import com.alex.bebidasapp.vo.Resource
-import com.alex.bebidasapp.vo.RetrofitClient
+import com.alex.bebidasapp.base.Resource
 
 class DrinksDataSource {
 
-    suspend fun getDrinkByName(drinkName:String):Resource<List<Drink>>{
+    suspend fun getDrinkByName(drinkName:String): Resource<List<Drink>> {
         return Resource.Success(RetrofitClient.webservice.getDrinksByName(drinkName).drinkList)
     }
 

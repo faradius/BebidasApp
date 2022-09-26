@@ -7,20 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alex.bebidasapp.R
-import com.alex.bebidasapp.data.local.DrinksDataSource
+import com.alex.bebidasapp.utils.Constants
+import com.alex.bebidasapp.data.network.DrinksDataSource
 import com.alex.bebidasapp.data.model.Drink
 import com.alex.bebidasapp.databinding.FragmentMainBinding
 import com.alex.bebidasapp.domain.RepoImpl
 import com.alex.bebidasapp.ui.viewmodel.MainViewModel
 import com.alex.bebidasapp.ui.viewmodel.VMFactory
-import com.alex.bebidasapp.vo.Resource
+import com.alex.bebidasapp.base.Resource
 
 
 class MainFragment : Fragment(),MainAdapter.OnDrinkClickListener {
@@ -28,10 +28,6 @@ class MainFragment : Fragment(),MainAdapter.OnDrinkClickListener {
     private lateinit var binding: FragmentMainBinding
 
     private val viewModel by viewModels<MainViewModel> { VMFactory(RepoImpl(DrinksDataSource())) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,8 +85,8 @@ class MainFragment : Fragment(),MainAdapter.OnDrinkClickListener {
 
     override fun onDrinkClick(drink: Drink) {
         val bundle = Bundle()
-        bundle.putParcelable("drink",drink)
-        findNavController().navigate(R.id.drinksDetailFragment,bundle)
+        bundle.putParcelable(Constants.DRINK_KEY,drink)
+        findNavController().navigate(R.id.action_mainFragment_to_drinksDetailFragment,bundle)
     }
 
 }

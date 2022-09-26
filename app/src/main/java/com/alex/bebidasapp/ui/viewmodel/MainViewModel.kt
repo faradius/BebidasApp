@@ -3,7 +3,7 @@ package com.alex.bebidasapp.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.alex.bebidasapp.domain.Repo
-import com.alex.bebidasapp.vo.Resource
+import com.alex.bebidasapp.base.Resource
 import kotlinx.coroutines.Dispatchers
 
 class MainViewModel(private val repo: Repo):ViewModel() {
