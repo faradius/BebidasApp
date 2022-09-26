@@ -6,7 +6,7 @@ import com.alex.bebidasapp.vo.Resource
 
 class RepoImpl(private val dataSource:DrinksDataSource):Repo {
 
-    override fun getDrinksList(): Resource<List<Drink>> {
-        return dataSource.generateDrinksList
+    override suspend fun getDrinksList(drinkName:String): Resource<List<Drink>> {
+        return dataSource.getDrinkByName(drinkName)
     }
 }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
@@ -43,6 +44,13 @@ class MainFragment : Fragment(),MainAdapter.OnDrinkClickListener {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
         setupRecyclerView()
+        setupSearchView()
+        setupObservers()
+
+    }
+
+
+    private fun setupObservers(){
         viewModel.fetchDrinksList.observe(viewLifecycleOwner, Observer { result ->
             when(result){
                 is Resource.Loading -> {
@@ -57,6 +65,20 @@ class MainFragment : Fragment(),MainAdapter.OnDrinkClickListener {
                     Toast.makeText(requireContext(), "Ocurrio un error al traer los datos ${result.exception}", Toast.LENGTH_SHORT).show()
                 }
             }
+        })
+    }
+
+    private fun setupSearchView(){
+        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.setDrink(query!!)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
         })
     }
 

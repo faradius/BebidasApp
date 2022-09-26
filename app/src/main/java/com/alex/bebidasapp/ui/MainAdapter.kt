@@ -29,7 +29,7 @@ class MainAdapter(
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         when (holder) {
-            is MainViewHolder -> holder.bind(drinksList[position], position)
+            is MainViewHolder -> holder.bind(drinksList[position])
         }
     }
 
@@ -40,12 +40,12 @@ class MainAdapter(
     inner class MainViewHolder(private val binding: DrinksRowBinding) :
         BaseViewHolder<Drink>(binding.root) {
 
-        override fun bind(item: Drink, position: Int) {
-            Glide.with(context).load(item.image).centerCrop().into(binding.ivDrinks)
-            binding.tvTitle.text = item.name
-            binding.tvDescription.text = item.description
+        override fun bind(item: Drink) = with(binding){
+            Glide.with(context).load(item.image).centerCrop().into(ivDrinks)
+            tvTitle.text = item.name
+            tvDescription.text = item.description
 
-            binding.root.setOnClickListener { itemClickListener.onDrinkClick(item) }
+            root.setOnClickListener { itemClickListener.onDrinkClick(item) }
         }
 
     }

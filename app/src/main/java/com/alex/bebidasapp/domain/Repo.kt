@@ -4,5 +4,5 @@ import com.alex.bebidasapp.data.model.Drink
 import com.alex.bebidasapp.vo.Resource
 
 interface Repo {
-    fun getDrinksList(): Resource<List<Drink>>
+    suspend fun getDrinksList(drinkName:String): Resource<List<Drink>>
 }

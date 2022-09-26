@@ -1,21 +1,33 @@
 package com.alex.bebidasapp.ui.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
+import android.util.Log
+import androidx.lifecycle.*
 import com.alex.bebidasapp.domain.Repo
 import com.alex.bebidasapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
 
 class MainViewModel(private val repo: Repo):ViewModel() {
 
-    val fetchDrinksList = liveData(Dispatchers.IO) {
-        //Es como un postValue
-        emit(Resource.Loading())
-        try {
-            emit(repo.getDrinksList())
-        }catch (e:Exception){
-            emit(Resource.Failure(e))
+    private val drinksData = MutableLiveData<String>()
+
+    fun setDrink(drinkName:String){
+        drinksData.value = drinkName
+    }
+
+    init {
+        setDrink("margarita")
+    }
+
+    val fetchDrinksList = drinksData.distinctUntilChanged().switchMap { drinkName ->
+        liveData(Dispatchers.IO) {
+            //Es como un postValue
+            emit(Resource.Loading())
+            try {
+                emit(repo.getDrinksList(drinkName))
+            }catch (e:Exception){
+                emit(Resource.Failure(e))
+                Log.d("Error", "$e")
+            }
         }
     }
 }
