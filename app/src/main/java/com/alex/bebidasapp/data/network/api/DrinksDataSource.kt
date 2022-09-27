@@ -1,12 +1,23 @@
-package com.alex.bebidasapp.data.network
+package com.alex.bebidasapp.data.network.api
 
-import com.alex.bebidasapp.data.model.Drink
-import com.alex.bebidasapp.base.Resource
+import com.alex.bebidasapp.data.network.model.Drink
+import com.alex.bebidasapp.core.Resource
+import com.alex.bebidasapp.data.local.AppDataBase
+import com.alex.bebidasapp.data.local.entity.DrinkEntity
+import com.alex.bebidasapp.data.network.RetrofitClient
 
-class DrinksDataSource {
+class DrinksDataSource(private val appDatabase:AppDataBase) {
 
     suspend fun getDrinkByName(drinkName:String): Resource<List<Drink>> {
         return Resource.Success(RetrofitClient.webservice.getDrinksByName(drinkName).drinkList)
+    }
+
+    suspend fun insertDrinkIntoRoom(drink:DrinkEntity){
+        appDatabase.drinkDao().insertFavorite(drink)
+    }
+
+    suspend fun getDrinksFavorites(): Resource<List<DrinkEntity>> {
+        return Resource.Success(appDatabase.drinkDao().getAllFavoriteDrinks())
     }
 
     /*val generateDrinksList = Resource.Success(listOf(

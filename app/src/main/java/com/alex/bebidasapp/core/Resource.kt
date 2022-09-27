@@ -1,4 +1,4 @@
-package com.alex.bebidasapp.base
+package com.alex.bebidasapp.core
 
 //Es para el uso de corrutinas similar al uso de callbacks con interfaces pero esto es mas facil de implementar
 sealed class Resource<out T> {

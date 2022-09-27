@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -12,32 +11,41 @@
         android:id="@+id/ivDrink"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@mipmap/ic_launcher"
+        android:layout_margin="10dp"
         android:scaleType="centerCrop"
-        android:layout_margin="10dp"/>
-    
+        android:src="@mipmap/ic_launcher" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnSaveDrink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_24"
+        android:layout_marginStart="10dp"/>
+
+
     <TextView
         android:id="@+id/tvDrinkName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:text="Margarita Blue"
         android:textSize="25sp"
-        android:textStyle="bold"
-        android:layout_marginHorizontal="10dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvDrinkHasAlcohol"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:text="Drink with Alcoholic"/>
+        android:text="Drink with Alcoholic" />
 
     <TextView
         android:id="@+id/tvDrinkDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginVertical="5dp"
-        android:layout_marginHorizontal="10dp"/>
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp" />
 
 
 </LinearLayout>

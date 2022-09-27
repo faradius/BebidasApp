@@ -1,4 +1,4 @@
-package com.alex.bebidasapp.base
+package com.alex.bebidasapp.core
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

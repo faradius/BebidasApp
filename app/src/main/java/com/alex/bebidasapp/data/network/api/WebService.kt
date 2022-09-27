@@ -1,7 +1,7 @@
-package com.alex.bebidasapp.data.network
+package com.alex.bebidasapp.data.network.api
 
 import com.alex.bebidasapp.utils.Constants
-import com.alex.bebidasapp.data.model.DrinkList
+import com.alex.bebidasapp.data.network.model.DrinkList
 import retrofit2.http.GET
 import retrofit2.http.Query
 

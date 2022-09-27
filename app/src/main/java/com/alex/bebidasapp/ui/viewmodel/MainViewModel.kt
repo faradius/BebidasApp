@@ -2,11 +2,13 @@ package com.alex.bebidasapp.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.alex.bebidasapp.domain.Repo
-import com.alex.bebidasapp.base.Resource
+import com.alex.bebidasapp.repository.DrinkRepository
+import com.alex.bebidasapp.core.Resource
+import com.alex.bebidasapp.data.local.entity.DrinkEntity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MainViewModel(private val repo: Repo):ViewModel() {
+class MainViewModel(private val repo: DrinkRepository):ViewModel() {
 
     private val drinksData = MutableLiveData<String>()
 
@@ -30,10 +32,29 @@ class MainViewModel(private val repo: Repo):ViewModel() {
             }
         }
     }
+
+    fun saveFavoriteDrink(drink:DrinkEntity){
+        /*Con el viewModelScope va a saber cuando el fragmento del activity se destruya este viewModel va pasar por el metodo oncleared
+        //limpiando toodo lo que este ha hecho por su paso por lo que va ser eliminado toodo proceso que se siga ejecutando, y el launch
+        //es una corrutina de tipo context y previene hacer un scope de corrutina desde la UI*/
+        viewModelScope.launch {
+            repo.insertDrink(drink)
+        }
+    }
+
+    fun getDrinksFavorites() = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try {
+            emit(repo.getDrinksFavorites())
+        }catch (e:Exception){
+            emit(Resource.Failure(e))
+            Log.d("Error", "$e")
+        }
+    }
 }
 
-class VMFactory(private val repo: Repo): ViewModelProvider.Factory {
+class VMFactory(private val repo: DrinkRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(Repo::class.java).newInstance(repo)
+        return modelClass.getConstructor(DrinkRepository::class.java).newInstance(repo)
     }
 }

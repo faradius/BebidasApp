@@ -14,20 +14,22 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alex.bebidasapp.R
 import com.alex.bebidasapp.utils.Constants
-import com.alex.bebidasapp.data.network.DrinksDataSource
-import com.alex.bebidasapp.data.model.Drink
+import com.alex.bebidasapp.data.network.api.DrinksDataSource
+import com.alex.bebidasapp.data.network.model.Drink
 import com.alex.bebidasapp.databinding.FragmentMainBinding
-import com.alex.bebidasapp.domain.RepoImpl
+import com.alex.bebidasapp.repository.DrinkRepositoryImpl
 import com.alex.bebidasapp.ui.viewmodel.MainViewModel
 import com.alex.bebidasapp.ui.viewmodel.VMFactory
-import com.alex.bebidasapp.base.Resource
+import com.alex.bebidasapp.core.Resource
+import com.alex.bebidasapp.data.local.AppDataBase
 
 
 class MainFragment : Fragment(),MainAdapter.OnDrinkClickListener {
 
     private lateinit var binding: FragmentMainBinding
 
-    private val viewModel by viewModels<MainViewModel> { VMFactory(RepoImpl(DrinksDataSource())) }
+    private val viewModel by viewModels<MainViewModel> { VMFactory(DrinkRepositoryImpl(DrinksDataSource(
+        AppDataBase.getDatabase(requireActivity().applicationContext)))) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +44,10 @@ class MainFragment : Fragment(),MainAdapter.OnDrinkClickListener {
         setupRecyclerView()
         setupSearchView()
         setupObservers()
+
+        binding.btnGoToFavorites.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_favoritesFragment)
+        }
 
     }
 
