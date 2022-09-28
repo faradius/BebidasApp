@@ -89,7 +89,8 @@ class MainFragment : Fragment(),MainAdapter.OnDrinkClickListener {
         binding.rvDrinks.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
     }
 
-    override fun onDrinkClick(drink: Drink) {
+    //No necesita el parametro position
+    override fun onDrinkClick(drink: Drink, position:Int) {
         val bundle = Bundle()
         bundle.putParcelable(Constants.DRINK_KEY,drink)
         findNavController().navigate(R.id.action_mainFragment_to_drinksDetailFragment,bundle)

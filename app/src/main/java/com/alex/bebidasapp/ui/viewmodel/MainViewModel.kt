@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.alex.bebidasapp.repository.DrinkRepository
 import com.alex.bebidasapp.core.Resource
 import com.alex.bebidasapp.data.local.entity.DrinkEntity
+import com.alex.bebidasapp.data.network.model.Drink
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -49,6 +50,12 @@ class MainViewModel(private val repo: DrinkRepository):ViewModel() {
         }catch (e:Exception){
             emit(Resource.Failure(e))
             Log.d("Error", "$e")
+        }
+    }
+
+    fun deleteDrink(drink: Drink) {
+        viewModelScope.launch {
+            repo.deleteDrink(drink)
         }
     }
 }

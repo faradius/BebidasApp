@@ -11,13 +11,13 @@ import com.bumptech.glide.Glide
 
 class MainAdapter(
     private val context: Context,
-    private val drinksList: List<Drink>,
+    private var drinksList:List<Drink> = listOf(),
     private val itemClickListener: OnDrinkClickListener
 ) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnDrinkClickListener {
-        fun onDrinkClick(drink: Drink)
+        fun onDrinkClick(drink: Drink, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -27,7 +27,7 @@ class MainAdapter(
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         when (holder) {
-            is MainViewHolder -> holder.bind(drinksList[position])
+            is MainViewHolder -> holder.bind(drinksList[position], position)
         }
     }
 
@@ -38,12 +38,12 @@ class MainAdapter(
     inner class MainViewHolder(private val binding: DrinksRowBinding) :
         BaseViewHolder<Drink>(binding.root) {
 
-        override fun bind(item: Drink) = with(binding){
+        override fun bind(item: Drink, position: Int) = with(binding){
             Glide.with(context).load(item.image).centerCrop().into(ivDrinks)
             tvTitle.text = item.name
             tvDescription.text = item.description
 
-            root.setOnClickListener { itemClickListener.onDrinkClick(item) }
+            root.setOnClickListener { itemClickListener.onDrinkClick(item, position) }
         }
 
     }

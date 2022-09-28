@@ -18,4 +18,8 @@ class DrinkRepositoryImpl(private val dataSource: DrinksDataSource):DrinkReposit
     override suspend fun insertDrink(drink: DrinkEntity) {
         dataSource.insertDrinkIntoRoom(drink)
     }
+
+    override suspend fun deleteDrink(drink: Drink) {
+        dataSource.deleteDrink(drink)
+    }
 }

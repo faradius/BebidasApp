@@ -5,6 +5,7 @@ import com.alex.bebidasapp.core.Resource
 import com.alex.bebidasapp.data.local.AppDataBase
 import com.alex.bebidasapp.data.local.entity.DrinkEntity
 import com.alex.bebidasapp.data.network.RetrofitClient
+import com.alex.bebidasapp.data.network.model.asFavoriteEntity
 
 class DrinksDataSource(private val appDatabase:AppDataBase) {
 
@@ -18,6 +19,10 @@ class DrinksDataSource(private val appDatabase:AppDataBase) {
 
     suspend fun getDrinksFavorites(): Resource<List<DrinkEntity>> {
         return Resource.Success(appDatabase.drinkDao().getAllFavoriteDrinks())
+    }
+
+    suspend fun deleteDrink(drink: Drink) {
+        appDatabase.drinkDao().deleteDrink(drink.asFavoriteEntity())
     }
 
     /*val generateDrinksList = Resource.Success(listOf(

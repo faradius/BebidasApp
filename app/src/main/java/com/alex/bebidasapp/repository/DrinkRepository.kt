@@ -8,4 +8,5 @@ interface DrinkRepository {
     suspend fun getDrinksList(drinkName:String): Resource<List<Drink>>
     suspend fun getDrinksFavorites():Resource<List<DrinkEntity>>
     suspend fun insertDrink(drink:DrinkEntity)
+    suspend fun deleteDrink(drink: Drink)
 }

@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.alex.bebidasapp.data.local.entity.DrinkEntity
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -25,3 +26,6 @@ data class DrinkList(
     @SerializedName("drinks")
     val drinkList: List<Drink>
 )
+
+fun Drink.asFavoriteEntity(): DrinkEntity =
+    DrinkEntity(this.id,this.image,this.name,this.description,this.hasAlcohol)
