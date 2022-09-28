@@ -1,29 +1,31 @@
-package com.alex.bebidasapp.data.network.api
+package com.alex.bebidasapp.data.network
 
 import com.alex.bebidasapp.data.network.model.Drink
 import com.alex.bebidasapp.core.Resource
 import com.alex.bebidasapp.data.local.AppDataBase
+import com.alex.bebidasapp.data.local.dao.DrinkDao
 import com.alex.bebidasapp.data.local.entity.DrinkEntity
-import com.alex.bebidasapp.data.network.RetrofitClient
 import com.alex.bebidasapp.data.network.model.asFavoriteEntity
+import javax.inject.Inject
 
-class DrinksDataSource(private val appDatabase:AppDataBase) {
+class DataSourceImpl @Inject constructor(private val drinkDao:DrinkDao):DataSource {
 
-    suspend fun getDrinkByName(drinkName:String): Resource<List<Drink>> {
+    override suspend fun getDrinkByName(drinkName:String): Resource<List<Drink>> {
         return Resource.Success(RetrofitClient.webservice.getDrinksByName(drinkName).drinkList)
     }
 
-    suspend fun insertDrinkIntoRoom(drink:DrinkEntity){
-        appDatabase.drinkDao().insertFavorite(drink)
+    override suspend fun insertDrinkIntoRoom(drink:DrinkEntity){
+        drinkDao.insertFavorite(drink)
     }
 
-    suspend fun getDrinksFavorites(): Resource<List<DrinkEntity>> {
-        return Resource.Success(appDatabase.drinkDao().getAllFavoriteDrinks())
+    override suspend fun getDrinksFavorites(): Resource<List<DrinkEntity>> {
+        return Resource.Success(drinkDao.getAllFavoriteDrinks())
     }
 
-    suspend fun deleteDrink(drink: Drink) {
-        appDatabase.drinkDao().deleteDrink(drink.asFavoriteEntity())
+    override suspend fun deleteDrink(drink: Drink) {
+        drinkDao.deleteDrink(drink.asFavoriteEntity())
     }
+
 
     /*val generateDrinksList = Resource.Success(listOf(
         Drink("https://bakeitwithlove.com/wp-content/uploads/2021/09/Vodka-Margarita-sq.jpg","Margarita","Con azucar, vodka y nueces"),

@@ -1,11 +1,12 @@
 package com.alex.bebidasapp.repository
 
-import com.alex.bebidasapp.data.network.api.DrinksDataSource
 import com.alex.bebidasapp.data.network.model.Drink
 import com.alex.bebidasapp.core.Resource
 import com.alex.bebidasapp.data.local.entity.DrinkEntity
+import com.alex.bebidasapp.data.network.DataSource
+import javax.inject.Inject
 
-class DrinkRepositoryImpl(private val dataSource: DrinksDataSource):DrinkRepository {
+class RepoImpl @Inject constructor(private val dataSource: DataSource):Repo {
 
     override suspend fun getDrinksList(drinkName:String): Resource<List<Drink>> {
         return dataSource.getDrinkByName(drinkName)

@@ -11,7 +11,7 @@ import com.alex.bebidasapp.data.local.entity.DrinkEntity
 abstract class AppDataBase:RoomDatabase() {
 
     abstract fun drinkDao():DrinkDao
-
+/*
     companion object{
         private var INSTANCE: AppDataBase? = null
 
@@ -28,5 +28,5 @@ abstract class AppDataBase:RoomDatabase() {
         fun destroyInstance(){
             INSTANCE = null
         }
-    }
+    }*/
 }

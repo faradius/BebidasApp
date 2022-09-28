@@ -9,26 +9,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.alex.bebidasapp.R
-import com.alex.bebidasapp.data.local.AppDataBase
 import com.alex.bebidasapp.data.local.entity.DrinkEntity
-import com.alex.bebidasapp.data.network.api.DrinksDataSource
 import com.alex.bebidasapp.utils.Constants
 import com.alex.bebidasapp.data.network.model.Drink
 import com.alex.bebidasapp.databinding.FragmentDrinksDetailBinding
-import com.alex.bebidasapp.repository.DrinkRepositoryImpl
 import com.alex.bebidasapp.ui.viewmodel.MainViewModel
-import com.alex.bebidasapp.ui.viewmodel.VMFactory
+//import com.alex.bebidasapp.ui.viewmodel.VMFactory
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DrinksDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentDrinksDetailBinding
     private lateinit var drink: Drink
-    private val viewModel by viewModels<MainViewModel> { VMFactory(
+    private val viewModel by viewModels<MainViewModel>() /*{ VMFactory(
         DrinkRepositoryImpl(
-            DrinksDataSource(AppDataBase.getDatabase(requireActivity().applicationContext))
+            DataSourceImpl(AppDataBase.getDatabase(requireActivity().applicationContext))
         )
-    ) }
+    ) }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,15 +1,19 @@
 package com.alex.bebidasapp.ui.viewmodel
 
 import android.util.Log
+//import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.alex.bebidasapp.repository.DrinkRepository
+import com.alex.bebidasapp.repository.Repo
 import com.alex.bebidasapp.core.Resource
 import com.alex.bebidasapp.data.local.entity.DrinkEntity
 import com.alex.bebidasapp.data.network.model.Drink
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val repo: DrinkRepository):ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repo: Repo):ViewModel() {
 
     private val drinksData = MutableLiveData<String>()
 
@@ -60,8 +64,8 @@ class MainViewModel(private val repo: DrinkRepository):ViewModel() {
     }
 }
 
-class VMFactory(private val repo: DrinkRepository): ViewModelProvider.Factory {
+/*class VMFactory(private val repo: DrinkRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return modelClass.getConstructor(DrinkRepository::class.java).newInstance(repo)
     }
-}
+}*/
